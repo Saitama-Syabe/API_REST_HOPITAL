@@ -21,7 +21,7 @@ class moSpecialitemedecin extends bdd
 
             $PDOprepare -> execute(
                 array(
-                    'specialitemedecinid' => $specialitemedecin -> getSpecialitemedecin(),
+                    'specialitemedecinid' => $specialitemedecin -> getSpecialitemedecinid(),
                     'medecinid' => $specialitemedecin -> getMedecinid(),
                     'specialiteid' => $specialitemedecin -> getSpecialiteid(),
                     'date' => $specialitemedecin -> getDate(),
