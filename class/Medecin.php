@@ -38,7 +38,7 @@ class Medecin
     /**
      * @return mixed
      */
-    public function getUserid()
+    public function getMedecinid()
     {
         return $this->medecinid;
     }
@@ -46,7 +46,7 @@ class Medecin
     /**
      * @param mixed $medecinid
      */
-    public function setUserid($medecinid)
+    public function setMedecinid($medecinid)
     {
         $this->medecinid = $medecinid;
     }
