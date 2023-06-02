@@ -65,16 +65,11 @@ function GET_Specialitemedecin($_ACTION, Specialitemedecin $_Specialitemedecin, 
 
 function PostOrPutSpecialitemedecin($_ACTION, Specialitemedecin $_Specialitemedecin, moSpecialitemedecin $_ModelSpecialitemedecin, $tools)
 {
-
-    // Traitement de l'image
-    $_fileName = (isset($_FILES['photo']) ? (substr($tools::generateGuid(), 0, 8) . strrchr($_FILES['photo']['name'], '.')) : $_REQUEST['oldfilename']);
-    isset($_FILES['photo']) ? move_uploaded_file($_FILES['photo']['tmp_name'], ('../../files/'.$_fileName)) : null;
-    (isset($_FILES['photo']) && $_ACTION == 'UpdateById' && !empty($_REQUEST['oldfilename']) && $_REQUEST['oldfilename'] !== null) ? unlink('../../files/'.$_REQUEST['oldfilename']) : null;
-
     $_Specialitemedecin->setAction($_ACTION);
     $_Specialitemedecin->setSpecialitemedecinid((isset($_REQUEST['specialitemedecinid']) && !empty($_REQUEST['specialitemedecinid']) && ($_REQUEST['specialitemedecinid'] != 'undefined') && ($_REQUEST['specialitemedecinid'] != null) && ($_REQUEST['specialitemedecinid'] != 'null')) ? $_REQUEST['specialitemedecinid'] : $tools::generateGuid());
     $_Specialitemedecin->setmedecinid($_REQUEST['medecinid']);
     $_Specialitemedecin -> setspecialiteid($_REQUEST['specialiteid']);
+    $_Specialitemedecin -> setDate($_REQUEST['date']);
     $_Specialitemedecin->setCreatedBy($_REQUEST['createdby']);
 
     $_Response = $_ModelSpecialitemedecin->CrudSpecialitemedecin($_Specialitemedecin);

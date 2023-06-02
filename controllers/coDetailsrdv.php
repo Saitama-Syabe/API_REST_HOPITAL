@@ -16,7 +16,7 @@ if ($_REQUEST_METHOD == 'POST')
         if (
             isset($_REQUEST['rdvid']) && !empty($_REQUEST['rdvid'])
             && isset($_REQUEST['date']) && !empty($_REQUEST['date'])
-            && isset($_REQUEST['isfirstrdv']) && !empty($_REQUEST['isfirstrdv'])
+            && isset($_REQUEST['isfirstrdv'])
             && isset($_REQUEST['createdby']) && !empty($_REQUEST['createdby']))
         {
             $_RESPONSE = PostOrPutDetailsrdv($_REQUEST_ACTION, $_Detailsrdv, $_ModelDetailsrdv, $tools);
@@ -47,7 +47,7 @@ if ($_REQUEST_ACTION != null && ($_REQUEST_ACTION == $_Action::$DeleteById || $_
 // Bloc des requêtes http GET
 if ($_REQUEST_METHOD == 'GET') {
     if ($_REQUEST_ACTION != null && ($_REQUEST_ACTION == $_Action::$SelectAll || $_REQUEST_ACTION == $_Action::$SelectById)) {
-        $_RESPONSE = GET_Detailsrdvid($_REQUEST_ACTION, $_Detailsrdvid, $_ModelDetailsrdvid, $tools);
+        $_RESPONSE = GET_Detailsrdv($_REQUEST_ACTION, $_Detailsrdv, $_ModelDetailsrdv, $tools);
     }
 }
 
@@ -56,37 +56,26 @@ if ($_REQUEST_METHOD == 'GET') {
 function GET_Detailsrdv($_ACTION, Detailsrdv $_Detailsrdv, moDetailsrdv $_ModelDetailsrdv, $tools)
 {
 
-    $_Detailsrdvid->setAction($_ACTION);
-    $_Detailsrdvid->setDetailsrdvid((isset($_REQUEST['detailsrdvid']) &&
+    $_Detailsrdv->setAction($_ACTION);
+    $_Detailsrdv->setDetailsrdvid((isset($_REQUEST['detailsrdvid']) &&
         !empty($_REQUEST['detailsrdvid']) && $_REQUEST['detailsrdvid'] != 'undefined') ?  $_REQUEST['detailsrdvid'] : '');
-    $_Response = $_ModelDetailsrdv->CrudDetailsrdv ;($_Detailsrdv);
+    $_Response = $_ModelDetailsrdv->CrudDetailsrdv($_Detailsrdv);
     return $tools::getMessageResult($_Response != null && $_Response != 1 && sizeof($_Response) > 0 ? $_Response : array());
 }
 
 function PostOrPutDetailsrdv($_ACTION, Detailsrdv $_Detailsrdv, moDetailsrdv $_ModelDetailsrdv, $tools)
 {
 
-    // Traitement de l'image
-    /*
-    $_fileName = (isset($_FILES['photo']) ? (substr($tools::generateGuid(), 0, 8) . strrchr($_FILES['photo']['name'], '.')) : $_REQUEST['oldfilename']);
-    isset($_FILES['photo']) ? move_uploaded_file($_FILES['photo']['tmp_name'], ('../../files/'.$_fileName)) : null;
-    (isset($_FILES['photo']) && $_ACTION == 'UpdateById' && !empty($_REQUEST['oldfilename']) && $_REQUEST['oldfilename'] !== null) ? unlink('../../files/'.$_REQUEST['oldfilename']) : null;
+    $_Detailsrdv->setAction($_ACTION);
+    $_Detailsrdv->setDetailsrdvid((isset($_REQUEST['detailsrdvid']) && !empty($_REQUEST['detailsrdvid']) && ($_REQUEST['detailsrdvid'] != 'undefined') && ($_REQUEST['detailsrdvid'] != null) && ($_REQUEST['detailsrdvid'] != 'null')) ? $_REQUEST['detailsrdvid'] : $tools::generateGuid());
+    $_Detailsrdv->setRdvid($_REQUEST['rdvid']);
+    $_Detailsrdv -> setDate($_REQUEST['date']);
+    $_Detailsrdv->setIsfirstrdv($_REQUEST['isfirstrdv']);
+    $_Detailsrdv->setCreatedBy($_REQUEST['createdby']);
 
-    $_User->setAction($_ACTION);
-    $_User->setUserid((isset($_REQUEST['userid']) && !empty($_REQUEST['userid']) && ($_REQUEST['userid'] != 'undefined') && ($_REQUEST['userid'] != null) && ($_REQUEST['userid'] != 'null')) ? $_REQUEST['userid'] : $tools::generateGuid());
-    $_User->setNom($_REQUEST['nom']);
-    $_User -> setPrenom($_REQUEST['prenom']);
-    $_User->setPhoto($_fileName);
-    $_User -> setContact($_REQUEST['contact']);
-    $_User -> setDatenaissance($_REQUEST['datenaissance']);
-    $_User -> setEmail($_REQUEST['email']);
-    $_User -> setLieuhabitation($_REQUEST['lieuhabitation']);
-    $_User->setCodeuser($_REQUEST['codeuser']);
-    $_User->setCreatedBy($_REQUEST['createdby']);
-
-    $_Response = $_ModelUser->CrudUser($_User);
+    $_Response = $_ModelDetailsrdv->CrudDetailsrdv($_Detailsrdv);
     return $tools::getMessageSuccess($_Response);
-    */
+    
 }
 
 

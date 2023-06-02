@@ -60,8 +60,8 @@ function GET_Medecin($_ACTION, Medecin $_Medecin, moMedecin $_ModelMedecin, $too
 {
 
     $_Medecin->setAction($_ACTION);
-    $_Medecin->setMedecinid((isset($_REQUEST['medecin']) &&
-        !empty($_REQUEST['medecin']) && $_REQUEST['medecin'] != 'undefined') ?  $_REQUEST['medecin'] : '');
+    $_Medecin->setMedecinid((isset($_REQUEST['medecinid']) &&
+        !empty($_REQUEST['medecinid']) && $_REQUEST['medecinid'] != 'undefined') ?  $_REQUEST['medecinid'] : '');
     $_Response = $_ModelMedecin->CrudMedecin($_Medecin);
     return $tools::getMessageResult($_Response != null && $_Response != 1 && sizeof($_Response) > 0 ? $_Response : array());
 }

@@ -32,9 +32,9 @@ if ($_REQUEST_ACTION != null && ($_REQUEST_ACTION == $_Action::$DeleteById || $_
     if (isset($_REQUEST['specialiteid']) && !empty($_REQUEST['specialiteid'])) {
 
         $_Specialite->setAction($_REQUEST_ACTION);
-        $_Specialite->setSpecialite($_REQUEST['specialiteid']);
+        $_Specialite->setSpecialiteid($_REQUEST['specialiteid']);
         $_Specialite -> setCreatedby($_REQUEST['createdby']);
-        $_Response = $_Model_Specialite->CrudSpecialite($_Specialite);
+        $_Response = $_ModelSpecialite->CrudSpecialite($_Specialite);
         $_RESPONSE = $tools::getMessageSuccess($_Response);
     } else {
         $_RESPONSE = $tools::getMessageEmpty();
@@ -56,7 +56,7 @@ function GET_Specialite($_ACTION, Specialite $_Specialite, moSpecialite $_ModelS
 {
 
     $_Specialite->setAction($_ACTION);
-    $_Specialite->setSpecialite((isset($_REQUEST['specialiteid']) &&
+    $_Specialite->setSpecialiteid((isset($_REQUEST['specialiteid']) &&
         !empty($_REQUEST['specialiteid']) && $_REQUEST['specialiteid'] != 'undefined') ?  $_REQUEST['specialiteid'] : '');
     $_Response = $_ModelSpecialite->CrudSpecialite($_Specialite);
     return $tools::getMessageResult($_Response != null && $_Response != 1 && sizeof($_Response) > 0 ? $_Response : array());
@@ -64,16 +64,10 @@ function GET_Specialite($_ACTION, Specialite $_Specialite, moSpecialite $_ModelS
 
 function PostOrPutSpecialite($_ACTION, Specialite $_Specialite, moSpecialite $_ModelSpecialite, $tools)
 {
-
-    // Traitement de l'image
-    $_fileName = (isset($_FILES['photo']) ? (substr($tools::generateGuid(), 0, 8) . strrchr($_FILES['photo']['name'], '.')) : $_REQUEST['oldfilename']);
-    isset($_FILES['photo']) ? move_uploaded_file($_FILES['photo']['tmp_name'], ('../../files/'.$_fileName)) : null;
-    (isset($_FILES['photo']) && $_ACTION == 'UpdateById' && !empty($_REQUEST['oldfilename']) && $_REQUEST['oldfilename'] !== null) ? unlink('../../files/'.$_REQUEST['oldfilename']) : null;
-
     $_Specialite->setAction($_ACTION);
-    $_Specialite->setSpecialite((isset($_REQUEST['specialiteid']) && !empty($_REQUEST['specialiteid']) && ($_REQUEST['specialiteid'] != 'undefined') && ($_REQUEST['specialiteid'] != null) && ($_REQUEST['specialiteid'] != 'null')) ? $_REQUEST['specialiteid'] : $tools::generateGuid());
-    $_Specialite->setNom($_REQUEST['libelle']);
-    $_Specialite -> setPrenom($_REQUEST['description']);
+    $_Specialite->setSpecialiteid((isset($_REQUEST['specialiteid']) && !empty($_REQUEST['specialiteid']) && ($_REQUEST['specialiteid'] != 'undefined') && ($_REQUEST['specialiteid'] != null) && ($_REQUEST['specialiteid'] != 'null')) ? $_REQUEST['specialiteid'] : $tools::generateGuid());
+    $_Specialite->setLibelle($_REQUEST['libelle']);
+    $_Specialite -> setDescription($_REQUEST['description']);
     $_Specialite->setCreatedBy($_REQUEST['createdby']);
 
     $_Response = $_ModelSpecialite->CrudSpecialite($_Specialite);
