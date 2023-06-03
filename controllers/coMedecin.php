@@ -70,15 +70,16 @@ function PostOrPutMedecin($_ACTION, Medecin $_Medecin, moMedecin $_ModelMedecin,
 {
 
     // Traitement de l'image
-    $_fileName = (isset($_FILES['photo']) ? (substr($tools::generateGuid(), 0, 8) . strrchr($_FILES['photo']['name'], '.')) : $_REQUEST['oldfilename']);
+   /* $_fileName = (isset($_FILES['photo']) ? (substr($tools::generateGuid(), 0, 8) . strrchr($_FILES['photo']['name'], '.')) : $_REQUEST['oldfilename']);
     isset($_FILES['photo']) ? move_uploaded_file($_FILES['photo']['tmp_name'], ('../../files/'.$_fileName)) : null;
     (isset($_FILES['photo']) && $_ACTION == 'UpdateById' && !empty($_REQUEST['oldfilename']) && $_REQUEST['oldfilename'] !== null) ? unlink('../../files/'.$_REQUEST['oldfilename']) : null;
-
+*/
     $_Medecin->setAction($_ACTION);
     $_Medecin->setMedecinid((isset($_REQUEST['medecinid']) && !empty($_REQUEST['medecinid']) && ($_REQUEST['medecinid'] != 'undefined') && ($_REQUEST['medecinid'] != null) && ($_REQUEST['medecinid'] != 'null')) ? $_REQUEST['medecinid'] : $tools::generateGuid());
     $_Medecin->setNom($_REQUEST['nom']);
     $_Medecin -> setPrenom($_REQUEST['prenom']);
-    $_Medecin->setPhoto($_fileName);
+    /*$_Medecin->setPhoto($_fileName);*/
+    $_Medecin->setPhoto($_REQUEST['prenom']);
     $_Medecin -> setDatenaissance($_REQUEST['datenaissance']);
     $_Medecin -> setEmail($_REQUEST['email']);
     $_Medecin -> setLieuhabitation($_REQUEST['lieuhabitation']);

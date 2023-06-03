@@ -7,7 +7,7 @@ class bdd extends Action
     private $host ='localhost';
     private $userName= 'root';
     private $userPass= '';
-    protected $dbName= 'bd_hoptital';
+    protected $dbName= 'bd_hopital';
 
     private $dns;
     protected $connexion;
@@ -42,11 +42,11 @@ class bdd extends Action
 
     private function setDataBaseInfo(){
         if(!isset($this->_REQUEST_BDENAME) || (isset($this->_REQUEST_BDENAME) &&  empty($this->_REQUEST_BDENAME)) ) {
-            $this->dbName = 'bd_hoptital';
+            $this->dbName = 'bd_hopital';
             return;
         }
         // Récuperation des informations de la base primare suivant la clé
-        $this->dbName = !empty($this->_REQUEST_BDENAME) ? $this->_REQUEST_BDENAME : 'bd_hoptital';
+        $this->dbName = !empty($this->_REQUEST_BDENAME) ? $this->_REQUEST_BDENAME : 'bd_hopital';
 
     }
 
