@@ -5,7 +5,7 @@ include '../models/bdd.php';
 class moAccess extends bdd
 {
 
-    public function Connexion (Access $access) {
+    public function CrudAccess (Access $access) {
         $this -> Query = 'CALL ps_Access (
                                         :accessid,
                                         :userid,
@@ -33,7 +33,7 @@ class moAccess extends bdd
                 )
             );
 
-            switch ($user -> getAction()) {
+            switch ($access -> getAction()) {
                 case $this::$SelectAll :
                     $this -> Response = $PDOprepare -> fetchAll();
                     break;

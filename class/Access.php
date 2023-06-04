@@ -1,6 +1,6 @@
 <?php
 include 'Action.php';
-class User
+class Access
 {
     private $id;
     private $accessid;

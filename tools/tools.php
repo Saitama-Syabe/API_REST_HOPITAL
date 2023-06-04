@@ -45,7 +45,6 @@ class tools
      * @return array
      */
     public static function getMessageSuccess($response){
-
         if($response == 1)
         {
             $_RESPONSE['message'] = 'Opération éffectuée avec succès';
