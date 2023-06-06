@@ -13,6 +13,7 @@ if ($_REQUEST_METHOD == 'POST')
 {
 
     if ($_REQUEST_ACTION != null && ($_REQUEST_ACTION == $_Action::$Connect)) {
+        
         if (
             isset($_REQUEST['username']) && !empty($_REQUEST['username'])
             && isset($_REQUEST['password']) && !empty($_REQUEST['password']))
