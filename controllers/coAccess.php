@@ -22,7 +22,7 @@ if ($_REQUEST_METHOD == 'POST')
             $_Access->setPassword($_REQUEST['password']);
             $_Response = $_ModelAccess->CrudAccess($_Access);
             
-            return $tools::getMessageResult($_Response != null && $_Response != 1 && sizeof($_Response) > 1 ? $_Response : array());
+            $_RESPONSE = $tools::getMessageResult($_Response != null && $_Response != 1 && sizeof($_Response) > 1 ? $_Response : array());
         } else {
             $_RESPONSE = $tools::getMessageEmpty();
         }
@@ -41,9 +41,40 @@ if ($_REQUEST_METHOD == 'POST')
     }
 }
 
+// Bloc des requêtes http DELETE
+if ($_REQUEST_ACTION != null && ($_REQUEST_ACTION == $_Action::$DeleteById || $_REQUEST_ACTION == $_Action::$Delete) && $_REQUEST_METHOD == 'DELETE') {
+    if (isset($_REQUEST['accessid']) && !empty($_REQUEST['accessid'])) {
+
+        $_Access->setAction($_REQUEST_ACTION);
+        $_Access->setAccessid($_REQUEST['accessid']);
+        $_Access -> setCreatedby($_REQUEST['createdby']);
+        $_Response = $_ModelAccess->CrudAccess($_Access);
+        $_RESPONSE = $tools::getMessageSuccess($_Response);
+    } else {
+        $_RESPONSE = $tools::getMessageEmpty();
+    }
+}
 
 
 
+// Bloc des requêtes http GET
+if ($_REQUEST_METHOD == 'GET') {
+    if ($_REQUEST_ACTION != null && ($_REQUEST_ACTION == $_Action::$SelectAll || $_REQUEST_ACTION == $_Action::$SelectById)) {
+        $_RESPONSE = GET_Access($_REQUEST_ACTION, $_Access, $_ModelAccess, $tools);
+    }
+}
+
+
+// Liste des fonctions
+function GET_Access($_ACTION, Access $_Access, moAccess $_ModelAccess, $tools)
+{
+
+    $_Access->setAction($_ACTION);
+    $_Access->setAccessid((isset($_REQUEST['accessid']) &&
+        !empty($_REQUEST['accessid']) && $_REQUEST['accessid'] != 'undefined') ?  $_REQUEST['accessid'] : '');
+    $_Response = $_ModelAccess->CrudAccess($_Access);
+    return $tools::getMessageResult($_Response != null && $_Response != 1 && sizeof($_Response) > 0 ? $_Response : array());
+}
 
 function PostOrPutAccess($_ACTION, Access $_Access, moAccess $_ModelAccess, $tools)
 {
