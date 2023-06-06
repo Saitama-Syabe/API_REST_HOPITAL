@@ -13,6 +13,7 @@ if ($_REQUEST_METHOD == 'POST')
 {
 
     if ($_REQUEST_ACTION != null && ($_REQUEST_ACTION == $_Action::$Connect)) {
+        
         if (
             isset($_REQUEST['username']) && !empty($_REQUEST['username'])
             && isset($_REQUEST['password']) && !empty($_REQUEST['password']))
@@ -21,8 +22,8 @@ if ($_REQUEST_METHOD == 'POST')
             $_Access->setUsername($_REQUEST['username']);
             $_Access->setPassword($_REQUEST['password']);
             $_Response = $_ModelAccess->CrudAccess($_Access);
-            
-            return $tools::getMessageResult($_Response != null && $_Response != 1 && sizeof($_Response) > 1 ? $_Response : array());
+            // print_r($_Response);
+            $_RESPONSE = $tools::getMessageResult($_Response != null && $_Response != 1 && sizeof($_Response) > 1 ? $_Response : array());
         } else {
             $_RESPONSE = $tools::getMessageEmpty();
         }
