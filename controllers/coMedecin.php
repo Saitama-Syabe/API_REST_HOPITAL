@@ -79,7 +79,7 @@ function PostOrPutMedecin($_ACTION, Medecin $_Medecin, moMedecin $_ModelMedecin,
     $_Medecin->setNom($_REQUEST['nom']);
     $_Medecin -> setPrenom($_REQUEST['prenom']);
     /*$_Medecin->setPhoto($_fileName);*/
-    $_Medecin->setPhoto($_REQUEST['prenom']);
+    $_Medecin->setPhoto($_REQUEST['photo']);
     $_Medecin -> setDatenaissance($_REQUEST['datenaissance']);
     $_Medecin -> setEmail($_REQUEST['email']);
     $_Medecin -> setLieuhabitation($_REQUEST['lieuhabitation']);
