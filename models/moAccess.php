@@ -11,7 +11,7 @@ class moAccess extends bdd
                                         :userid,
                                         :username,
                                         :password,
-                                        :experedon,
+                                        :expiredon,
                                         :createdby,
                                         :Action)';
 
@@ -27,7 +27,7 @@ class moAccess extends bdd
                     'userid' => $access -> getUserid(),
                     'username' => $access -> getUsername(),
                     'password' => $access -> getPassword(),
-                    'experedon' => $access -> getExperedon(),
+                    'expiredon' => $access -> getExperedon(),
                     'createdby' => $access -> getCreatedby(),
                     'Action' => $access -> getAction(),
                 )
