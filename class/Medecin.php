@@ -10,6 +10,7 @@ class Medecin
     private $email;
     private $lieuhabitation;
     private $photo;
+    private $specialiteid;
     private $createdby;
     private $createdon;
     private $status;
@@ -17,6 +18,22 @@ class Medecin
 
     public function __construct()
     {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSpecialiteid()
+    {
+        return $this->specialiteid;
+    }
+
+    /**
+     * @param mixed $specialiteid
+     */
+    public function setSpecialiteid($specialiteid): void
+    {
+        $this->specialiteid = $specialiteid;
     }
 
     /**

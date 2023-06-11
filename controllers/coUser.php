@@ -12,7 +12,7 @@ $tools = new tools();
 if ($_REQUEST_METHOD == 'POST')
 {
 
-    if ($_REQUEST_ACTION != null && ($_REQUEST_ACTION == $_Action::$Insert || $_REQUEST_ACTION == $_Action::$UpdateById)) {
+    if ($_REQUEST_ACTION != null && ($_REQUEST_ACTION == $_Action::$Insert || $_REQUEST_ACTION == $_Action::$UpdateById || $_REQUEST_ACTION == $_Action::$Suscribe)) {
         if (
             isset($_REQUEST['nom']) && !empty($_REQUEST['nom'])
             && isset($_REQUEST['prenom']) && !empty($_REQUEST['prenom'])
@@ -21,7 +21,7 @@ if ($_REQUEST_METHOD == 'POST')
             && isset($_REQUEST['email']) && !empty($_REQUEST['email'])
             && isset($_REQUEST['lieuhabitation']) && !empty($_REQUEST['lieuhabitation'])
             && isset($_REQUEST['codeuser']) && !empty($_REQUEST['codeuser'])
-            && isset($_REQUEST['photo']) && !empty($_REQUEST['photo'])
+            // && isset($_REQUEST['photo']) && !empty($_REQUEST['photo'])
             && isset($_REQUEST['createdby']) && !empty($_REQUEST['createdby']))
         {
             $_RESPONSE = PostOrPutUser($_REQUEST_ACTION, $_User, $_ModelUser, $tools);
@@ -70,18 +70,16 @@ function GET_User($_ACTION, User $_User, moUser $_ModelUser, $tools)
 
 function PostOrPutUser($_ACTION, User $_User, moUser $_ModelUser, $tools)
 {
-
     // Traitement de l'image
-    /* $_fileName = (isset($_FILES['photo']) ? (substr($tools::generateGuid(), 0, 8) . strrchr($_FILES['photo']['name'], '.')) : $_REQUEST['oldfilename']);
-    isset($_FILES['photo']) ? move_uploaded_file($_FILES['photo']['tmp_name'], ('../../files/'.$_fileName)) : null;
+    $_fileName = (isset($_FILES['photo']) ? (substr($tools::generateGuid(), 0, 8) . strrchr($_FILES['photo']['name'], '.')) : $_REQUEST['oldfilename']);
+    isset($_FILES['photo']) ? move_uploaded_file($_FILES['photo']['tmp_name'], ('../files/'.$_fileName)) : null;
     (isset($_FILES['photo']) && $_ACTION == 'UpdateById' && !empty($_REQUEST['oldfilename']) && $_REQUEST['oldfilename'] !== null) ? unlink('../../files/'.$_REQUEST['oldfilename']) : null;
- */
     $_User->setAction($_ACTION);
     $_User->setUserid((isset($_REQUEST['userid']) && !empty($_REQUEST['userid']) && ($_REQUEST['userid'] != 'undefined') && ($_REQUEST['userid'] != null) && ($_REQUEST['userid'] != 'null')) ? $_REQUEST['userid'] : $tools::generateGuid());
     $_User->setNom($_REQUEST['nom']);
     $_User -> setPrenom($_REQUEST['prenom']);
-    $_User -> setPhoto($_REQUEST['photo']);
-    /* $_User->setPhoto($_fileName); */
+    $_User->setPhoto($_fileName);
+    $_User -> setPassword((isset($_REQUEST['password']) && !empty($_REQUEST['password']) && ($_REQUEST['password'] != 'undefined') && ($_REQUEST['password'] != null) && ($_REQUEST['password'] != 'null')) ? $_REQUEST['password'] : '');
     $_User -> setContact($_REQUEST['contact']);
     $_User -> setDatenaissance($_REQUEST['datenaissance']);
     $_User -> setEmail($_REQUEST['email']);

@@ -13,6 +13,7 @@ class moMedecin extends bdd
                                            :email,
                                            :lieuhabitation,
                                            :photo,
+                                           :specialiteid,
                                            :createdby,
                                            :Action)';
 
@@ -31,6 +32,7 @@ class moMedecin extends bdd
                     'email' => $medecin -> getEmail(),
                     'lieuhabitation' => $medecin -> getLieuhabitation(),
                     'photo' => $medecin -> getPhoto(),
+                    'specialiteid' => $medecin -> getSpecialiteid(),
                     'createdby' => $medecin -> getCreatedBy(),
                     'Action' => $medecin -> getAction(),
                 )

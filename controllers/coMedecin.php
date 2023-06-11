@@ -11,7 +11,6 @@ $tools = new tools();
 // bloc des requêtes http POST
 if ($_REQUEST_METHOD == 'POST')
 {
-
     if ($_REQUEST_ACTION != null && ($_REQUEST_ACTION == $_Action::$Insert || $_REQUEST_ACTION == $_Action::$UpdateById)) {
         if (
             isset($_REQUEST['nom']) && !empty($_REQUEST['nom'])
@@ -20,6 +19,7 @@ if ($_REQUEST_METHOD == 'POST')
             && isset($_REQUEST['email']) && !empty($_REQUEST['email'])
             && isset($_REQUEST['lieuhabitation']) && !empty($_REQUEST['lieuhabitation'])
             && isset($_REQUEST['photo']) && !empty($_REQUEST['photo'])
+            && isset($_REQUEST['specialiteid']) && !empty($_REQUEST['specialiteid'])
             && isset($_REQUEST['createdby']) && !empty($_REQUEST['createdby']))
         {
             $_RESPONSE = PostOrPutMedecin($_REQUEST_ACTION, $_Medecin, $_ModelMedecin, $tools);
@@ -79,7 +79,8 @@ function PostOrPutMedecin($_ACTION, Medecin $_Medecin, moMedecin $_ModelMedecin,
     $_Medecin->setNom($_REQUEST['nom']);
     $_Medecin -> setPrenom($_REQUEST['prenom']);
     /*$_Medecin->setPhoto($_fileName);*/
-    $_Medecin->setPhoto($_REQUEST['prenom']);
+    $_Medecin->setPhoto($_REQUEST['photo']);
+    $_Medecin->setSpecialiteid($_REQUEST['specialiteid']);
     $_Medecin -> setDatenaissance($_REQUEST['datenaissance']);
     $_Medecin -> setEmail($_REQUEST['email']);
     $_Medecin -> setLieuhabitation($_REQUEST['lieuhabitation']);

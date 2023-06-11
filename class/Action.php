@@ -3,6 +3,7 @@
 class Action
 {
     public static $Insert = 'Insert';
+    public static $Suscribe = 'Suscribe';
     public static $UpdateById = 'UpdateById';
     public static $DeleteById = 'DeleteById';
     public static $SelectAll = 'SelectAll';
@@ -34,6 +35,22 @@ class Action
     private $createdon;
     private $status;
     private $action;
+
+    /**
+     * @return string
+     */
+    public static function getSuscribe(): string
+    {
+        return self::$Suscribe;
+    }
+
+    /**
+     * @param string $Suscribe
+     */
+    public static function setSuscribe(string $Suscribe): void
+    {
+        self::$Suscribe = $Suscribe;
+    }
 
     /**
      * @return string

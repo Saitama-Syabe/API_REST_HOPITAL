@@ -12,6 +12,7 @@ class User
     private $lieuhabitation;
     private $photo;
     private $codeuser;
+    private $password;
     private $createdby;
     private $createdon;
     private $status;
@@ -19,6 +20,22 @@ class User
 
     public function __construct()
     {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password): void
+    {
+        $this->password = $password;
     }
 
     /**

@@ -8,6 +8,7 @@ class moRdv extends bdd
     public function CrudRdv (Rdv $rdv) {
         $this -> Query = 'CALL ps_rdv (:rdvid,
                                        :userid,
+                                       :daterdv,
                                        :specialitemedecinid,
                                        :createdby,
                                        :Action)';
@@ -22,6 +23,7 @@ class moRdv extends bdd
                 array(
                     'rdvid' => $rdv -> getRdvid(),
                     'userid' => $rdv -> getUserid(),
+                    'daterdv' => $rdv -> getDaterdv(),
                     'specialitemedecinid' => $rdv -> getSpecialitemedecinid(),
                     'createdby' => $rdv -> getCreatedBy(),
                     'Action' => $rdv -> getAction(),
@@ -30,10 +32,8 @@ class moRdv extends bdd
 
             switch ($rdv -> getAction()) {
                 case $this::$SelectAll :
-                    $this -> Response = $PDOprepare -> fetchAll();
-                    break;
                 case $this::$SelectById :
-                    $this -> Response = $PDOprepare -> fetch();
+                    $this -> Response = $PDOprepare -> fetchAll();
                     break;
                 case $this::$Insert :
                 case $this::$UpdateById :

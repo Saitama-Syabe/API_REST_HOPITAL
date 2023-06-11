@@ -14,6 +14,7 @@ class moUser extends bdd
                                         :email,
                                         :lieuhabitation,
                                         :photo,
+                                        :password,
                                         :codeuser,
                                         :createdby,
                                         :Action)';
@@ -34,6 +35,7 @@ class moUser extends bdd
                     'email' => $user -> getEmail(),
                     'lieuhabitation' => $user -> getLieuhabitation(),
                     'photo' => $user -> getPhoto(),
+                    'password' => $user -> getPassword(),
                     'codeuser' => $user -> getCodeuser(),
                     'createdby' => $user -> getCreatedBy(),
                     'Action' => $user -> getAction(),
@@ -48,6 +50,7 @@ class moUser extends bdd
                     $this -> Response = $PDOprepare -> fetch();
                     break;
                 case $this::$Insert :
+                case $this::$Suscribe :
                 case $this::$UpdateById :
                 case $this::$DeleteById :
                     $this -> Response = $this -> ResponseSuccess;

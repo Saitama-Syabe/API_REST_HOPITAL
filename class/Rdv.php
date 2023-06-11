@@ -5,6 +5,7 @@ class Rdv
     private $id;
     private $rdvid;
     private $userid;
+    private $daterdv;
     private $specialitemedecinid;
     private $createdby;
     private $createdon;
@@ -13,6 +14,22 @@ class Rdv
 
     public function __construct()
     {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDaterdv()
+    {
+        return $this->daterdv;
+    }
+
+    /**
+     * @param mixed $daterdv
+     */
+    public function setDaterdv($daterdv): void
+    {
+        $this->daterdv = $daterdv;
     }
 
     /**
