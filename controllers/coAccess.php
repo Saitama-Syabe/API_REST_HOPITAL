@@ -32,7 +32,7 @@ if ($_REQUEST_METHOD == 'POST')
             isset($_REQUEST['username']) && !empty($_REQUEST['username'])
             && isset($_REQUEST['password']) && !empty($_REQUEST['password'])
             && isset($_REQUEST['userid']) && !empty($_REQUEST['userid'])
-            && isset($_REQUEST['expiredon']) && !empty($_REQUEST['expiredon'])
+            // && isset($_REQUEST['expiredon']) && !empty($_REQUEST['expiredon'])
             && isset($_REQUEST['createdby']) && !empty($_REQUEST['createdby']))
         {
             $_RESPONSE = PostOrPutAccess($_REQUEST_ACTION, $_Access, $_ModelAccess, $tools);
@@ -84,7 +84,7 @@ function PostOrPutAccess($_ACTION, Access $_Access, moAccess $_ModelAccess, $too
     $_Access->setUserid($_REQUEST['userid']);
     $_Access -> setUsername($_REQUEST['username']);
     $_Access->setPassword($_REQUEST['password']);
-    $_Access->setExperedon($_REQUEST['expiredon']);
+    // $_Access->setExperedon($_REQUEST['expiredon']);
     $_Access->setCreatedBy($_REQUEST['createdby']);
 
 
