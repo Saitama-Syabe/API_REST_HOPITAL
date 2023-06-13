@@ -73,7 +73,7 @@ function PostOrPutUser($_ACTION, User $_User, moUser $_ModelUser, $tools)
     // Traitement de l'image
     $_fileName = (isset($_FILES['photo']) ? (substr($tools::generateGuid(), 0, 8) . strrchr($_FILES['photo']['name'], '.')) : $_REQUEST['oldfilename']);
     isset($_FILES['photo']) ? move_uploaded_file($_FILES['photo']['tmp_name'], ('../files/'.$_fileName)) : null;
-    (isset($_FILES['photo']) && $_ACTION == 'UpdateById' && !empty($_REQUEST['oldfilename']) && $_REQUEST['oldfilename'] !== null) ? unlink('../../files/'.$_REQUEST['oldfilename']) : null;
+    (isset($_FILES['photo']) && $_ACTION == 'UpdateById' && !empty($_REQUEST['oldfilename']) && $_REQUEST['oldfilename'] !== null) ? unlink('../files/'.$_REQUEST['oldfilename']) : null;
     $_User->setAction($_ACTION);
     $_User->setUserid((isset($_REQUEST['userid']) && !empty($_REQUEST['userid']) && ($_REQUEST['userid'] != 'undefined') && ($_REQUEST['userid'] != null) && ($_REQUEST['userid'] != 'null')) ? $_REQUEST['userid'] : $tools::generateGuid());
     $_User->setNom($_REQUEST['nom']);
